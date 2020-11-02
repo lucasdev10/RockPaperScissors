@@ -1,4 +1,4 @@
-// RESET
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -7,26 +7,33 @@
   border: none;
 }
 
-// SCSS DEFAULT
+/* SCSS DEFAULT */
 @import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap");
 
 body {
   font-family: "Barlow Semi Condensed", sans-serif;
 }
 
-// COLORS
+/* COLORS */
 :root {
-  // Primary
+  /* Primary */
   --Scissors-Gradient: linear-gradient(#ec9e0e, #eca922);
   --Rock-Gradient: linear-gradient(#dc2e4e, #dd405d);
   --Lizard-Gradient: linear-gradient(#834fe3, #8c5de5);
   --Cyan: linear-gradient(#40b9ce, #52bed1);
 
-  // Neutral
+  /* Neutral */
   --Dark-Text: #3b4363;
   --Score-Text: #2a46c0;
-  --header-outline: #606e85;
+  --Header-Outline: #606e85;
 
-  // Background
+  /* Background */
   --Radial-Gradient: linear-gradient(#1f3756, #141539);
+}
+
+/* STYLES */
+.container {
+  width: 100%;
+  height: 100vh;
+  background: var(--Radial-Gradient);
 }
