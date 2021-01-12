@@ -22,53 +22,21 @@
         </div>
         <div class="score">
           <p>SCORE</p>
-          <p>11</p>
+          <p id="score"></p>
         </div>
       </header>
 
-      <!-- <section class="content-primary">
-        <img src="./images/bg-triangle.svg" alt="bg-triangle" />
-        <button class="btn-paper">
-          <img src="./images/icon-paper.svg" alt="paper" />
-        </button>
-        <button class="btn-scissors">
-          <img src="./images/icon-scissors.svg" alt="scissors" />
-        </button>
-        <button class="btn-rock">
-          <img src="./images/icon-rock.svg" alt="rock" />
-        </button>
-      </section> -->
+      <span id="content-primary"></span>
 
-      <section class="content-secondary">
-        <div>
-          <h2>YOU PICKED</h2>
-          <button class="btn-content-secondary">
-            <img src="./images/icon-paper.svg" alt="paper" />
-          </button>
-        </div>
-        <div class="play-again">
-          <h2>YOU LOSE</h2>
-          <button>PLAY AGAIN</button>
-        </div>
-        <div>
-          <h2>THE HOUSE PICKED</h2>
-          <button class="btn-content-secondary">
-            <img src="./images/icon-paper.svg" alt="paper" />
-          </button>
-        </div>
-      </section>
+      <span id="content-secondary"></span>
 
       <footer class="footer">
-        <button>RULES</button>
+        <button onclick="openModal()">RULES</button>
       </footer>
     </div>
+
+    <script type="text/javascript" src="./script.js"></script>
   </body>
 </html>
 
-<!-- <section class="modal-rules">
-  <div>
-    <h1>RULES</h1>
-    <img src="./images/icon-close.svg" alt="icon-close" />
-  </div>
-  <img class="rules" src="./images/image-rules.svg" alt="image-rules" />
-</section> -->
+<span id="modal"></span>
