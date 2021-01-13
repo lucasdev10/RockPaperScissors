@@ -37,19 +37,31 @@ body {
   width: 100%;
   height: 100%;
   min-height: 100vh;
-  padding: 40px 0 20px 0;
   background: var(--Radial-Gradient);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.languages {
+  display: flex;
+  position: absolute;
+  top: 2%;
+  left: 2%;
+}
+
+.languages a {
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 auto 8% auto;
-  padding: 15px 20px;
-  max-width: 880px;
+  padding: 10px 20px;
+  max-width: 800px;
   width: 60%;
-  background-color: transparent;
   border-radius: 10px;
   border: 3px solid var(--Header-Outline);
 }
@@ -81,21 +93,72 @@ body {
   color: var(--Dark-Text);
 }
 
-.content-primary {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  height: 280px;
-  width: 305px;
+.remaining-moves p {
+  color: #fff;
+  font-size: 1.2em;
+}
+
+.play-menu {
+  width: 100%;
+}
+
+.play-menu div {
+  width: 50%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.play-menu div h2 {
+  font-size: 2em;
+  color: #fff;
+  text-align: center;
+}
+
+.play-menu div h3 {
+  font-size: 1.3em;
+  color: #fff;
+  text-align: center;
+}
+
+.play-menu div input {
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: 25%;
+}
+
+.play-menu div button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: 40%;
+  color: #fff;
+  font-weight: 700;
+  background-color: #dc2e4e;
+  box-shadow: 1px 1px 3px 0px #d48989;
+}
+
+.play-menu div button:hover {
+  background-color: #af102d;
+  cursor: pointer;
+}
+
+.msg-error h3 {
+  display: block;
+  text-align: center;
+  font-size: 1.5em;
+  color: #460000;
+  margin-top: 15px;
+}
+
+.content-primary {
+  position: relative;
 }
 
 .btn-paper {
   position: absolute;
   top: -50px;
   left: -40px;
-  background-color: #fff;
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -118,7 +181,6 @@ body {
   position: absolute;
   top: -50px;
   right: -30px;
-  background-color: #fff;
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -141,7 +203,6 @@ body {
   position: absolute;
   bottom: -15px;
   left: 30%;
-  background-color: #fff;
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -161,22 +222,16 @@ body {
 }
 
 .content-secondary {
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 15%;
-  margin-top: -20px;
 }
 
 .content-secondary div {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #fff;
-  gap: 35px;
-  font-weight: 700;
 }
 
 .play-again h2 {
@@ -201,8 +256,8 @@ body {
 .btn-content-secondary {
   background-color: #fff;
   border-radius: 50%;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -222,14 +277,6 @@ body {
 
 .border-btn-rock {
   border: 20px solid #dc2e4e;
-}
-
-.footer {
-  width: 100%;
-  height: 40px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
 }
 
 .footer button {
@@ -281,107 +328,4 @@ body {
 .rules {
   width: 90%;
   margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding-top: 20px;
-  }
-
-  .header {
-    margin-bottom: 10%;
-    height: 90px;
-  }
-
-  .header .score {
-    height: 70px;
-    width: 125px;
-  }
-
-  .header .score p:last-child {
-    font-size: 2.3em;
-  }
-
-  .header .logo img {
-    max-height: 58px;
-  }
-
-  .center-triangle {
-    height: 240px;
-  }
-
-  .content-secondary {
-    padding: 0 5%;
-  }
-}
-
-@media (max-width: 420px) {
-  .header {
-    width: 90%;
-  }
-
-  .footer button {
-    right: calc(50% - 51px);
-    bottom: 7%;
-  }
-
-  .content-primary img {
-    width: 50%;
-  }
-
-  .content-primary > img {
-    width: 85%;
-  }
-
-  .btn-paper {
-    top: -20px;
-    left: -20px;
-    height: 140px;
-    width: 140px;
-  }
-
-  .btn-scissors {
-    top: -20px;
-    right: -15px;
-    height: 140px;
-    width: 140px;
-  }
-
-  .btn-rock {
-    bottom: -5px;
-    left: 80px;
-    height: 140px;
-    width: 140px;
-  }
-
-  .content-primary {
-    margin-top: 25%;
-  }
-
-  .play-again {
-    position: absolute;
-    top: 60%;
-    left: 25%;
-    flex-direction: column !important;
-  }
-
-  .content-secondary {
-    margin: auto;
-  }
-
-  .content-secondary div {
-    flex-direction: column-reverse;
-  }
-
-  .btn-content-secondary {
-    width: 145px;
-    height: 145px;
-  }
-
-  .modal-rules {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
 }
