@@ -117,7 +117,7 @@ function showViewContentSecondary(hidden, obj, ramdomObj, message) {
             setTimeout(() => {
                 showViewContentSecondary(true);
                 showViewOptions(false);
-            }, 2000);
+            }, 1500);
         }
 
         qtsNumberOfAattempts--;
@@ -157,16 +157,18 @@ function showViewOptions(hidden) {
         const HTML =
             `
     <section class="content-primary">
-    <img src="./images/bg-triangle.svg" alt="bg-triangle" />
-    <button onclick="selectOption('paper')" class="btn-paper">
-      <img src="./images/icon-paper.svg" alt="papper" />
-    </button>
-    <button onclick="selectOption('scissors')" class="btn-scissors">
-      <img src="./images/icon-scissors.svg" alt="scissors" />
-    </button>
-    <button onclick="selectOption('rock')" class="btn-rock">
-      <img src="./images/icon-rock.svg" alt="rock" />
-    </button>
+    <div>
+        <img src="./images/bg-triangle.svg" alt="bg-triangle" />
+        <button onclick="selectOption('paper')" class="btn-paper">
+        <img src="./images/icon-paper.svg" alt="papper" />
+        </button>
+        <button onclick="selectOption('scissors')" class="btn-scissors">
+        <img src="./images/icon-scissors.svg" alt="scissors" />
+        </button>
+        <button onclick="selectOption('rock')" class="btn-rock">
+        <img src="./images/icon-rock.svg" alt="rock" />
+        </button>
+    </div>
   </section>
     `;
 
@@ -190,6 +192,7 @@ function play() {
             document.getElementById('msg-error').innerHTML = null;
         }, 2000);
     } else {
+        document.getElementById('msg-error').innerHTML = null;
         qtsNumberOfAattempts = numberOfAattempts;
         showViewOptions(false);
         showMenuPlay(true);
@@ -202,7 +205,7 @@ function showMenuPlay(hidden) {
             `
     <div>
 <h2>Jogue pedra, papel e tesoura contra a máquina e teste sua sorte! :) Bom jogo!</h2>
-    <h3>Selecione o número de vezes que você deseja jogar:</h3>
+    <h3>Digite o número de vezes que você deseja jogar:</h3>
     <input
       type="number"
       name="number-of-attempts"

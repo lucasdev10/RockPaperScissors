@@ -114,10 +114,10 @@ function showViewContentSecondary(hidden, obj, ramdomObj, message) {
     document.getElementById('content-secondary').innerHTML = HTML;
 
     if (qtsNumberOfAattempts != 1) {
-      // setTimeout(() => {
-      //   showViewContentSecondary(true);
-      //   showViewOptions(false);
-      // }, 2000);
+      setTimeout(() => {
+        showViewContentSecondary(true);
+        showViewOptions(false);
+      }, 1500);
     }
 
     qtsNumberOfAattempts--;
@@ -157,16 +157,18 @@ function showViewOptions(hidden) {
     const HTML =
       `
     <section class="content-primary">
-    <img src="./images/bg-triangle.svg" alt="bg-triangle" />
-    <button onclick="selectOption('paper')" class="btn-paper">
-      <img src="./images/icon-paper.svg" alt="papper" />
-    </button>
-    <button onclick="selectOption('scissors')" class="btn-scissors">
-      <img src="./images/icon-scissors.svg" alt="scissors" />
-    </button>
-    <button onclick="selectOption('rock')" class="btn-rock">
-      <img src="./images/icon-rock.svg" alt="rock" />
-    </button>
+    <div>
+      <img src="./images/bg-triangle.svg" alt="bg-triangle" />
+      <button onclick="selectOption('paper')" class="btn-paper">
+        <img src="./images/icon-paper.svg" alt="papper" />
+      </button>
+      <button onclick="selectOption('scissors')" class="btn-scissors">
+        <img src="./images/icon-scissors.svg" alt="scissors" />
+      </button>
+      <button onclick="selectOption('rock')" class="btn-rock">
+        <img src="./images/icon-rock.svg" alt="rock" />
+      </button>
+    </div>
   </section>
     `;
 
@@ -183,13 +185,14 @@ function play() {
   if (numberOfAattempts <= 0) {
     const HTML =
       `
-    <h3>Please select a quantity...</h3>
+    <h3>Please enter a quantity...</h3>
     `
     document.getElementById('msg-error').innerHTML = HTML;
     setTimeout(() => {
       document.getElementById('msg-error').innerHTML = null;
     }, 2000);
   } else {
+    document.getElementById('msg-error').innerHTML = null;
     qtsNumberOfAattempts = numberOfAattempts;
     showViewOptions(false);
     showMenuPlay(true);
@@ -202,7 +205,7 @@ function showMenuPlay(hidden) {
       `
     <div>
 <h2>Throw rock, paper and scissors at the machine and test your luck! :) Good game!</h2>
-    <h3>Select the number of times you want to play:</h3>
+    <h3>Enter the number of times you want to play:</h3>
     <input
       type="number"
       name="number-of-attempts"
