@@ -3,53 +3,98 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./Style/CSSFile/main.css" />
     <link rel="stylesheet" href="styles/style.css" />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./images/favicon-32x32.png"
-    />
     <title>Rock, Paper, Scissors</title>
   </head>
 
   <body>
-    <div class="container">
-      <div class="languages">
-        <a href="./index.html">
-          <img src="./images/estados-unidos.svg" alt="estados-unidos" />
-        </a>
-        <a href="./index-pt.html"
-          ><img src="./images/brasil.svg" alt="brasil"
-        /></a>
-      </div>
-      <header class="header">
-        <div class="logo">
+    <section class="container">
+      <header id="header" class="header">
+        <h1 class="logo">
           <img src="./images/logo.svg" alt="logo" />
-        </div>
-        <div class="score">
-          <p>SCORE</p>
+        </h1>
+        <span class="score">
+          <h3>score</h3>
           <p id="score"></p>
-        </div>
+        </span>
       </header>
-      <span id="remaining-moves" class="remaining-moves"></span>
+      <span class="qtd-moves" id="qtd-moves"></span>
 
-      <span class="play-menu" id="play-menu"> </span>
+      <div id="menu-options" class="menu-options">
+        <h1>Rock, Paper and Scissors</h1>
+        <p>Be welcome!</p>
+        <p>Choose an option and start playing against the machine:</p>
+        <div class="box-buttons">
+          <button onclick="selectQuantity('1')" value="1" class="btn-choice">
+            1 time
+          </button>
+          <button onclick="selectQuantity('3')" value="3" class="btn-choice">
+            3 time
+          </button>
+          <button onclick="selectQuantity('5')" value="5" class="btn-choice">
+            5 time
+          </button>
+        </div>
+      </div>
 
-      <span class="msg-error" id="msg-error"> </span>
+      <div id="choice-options" class="choice-options">
+        <div class="content-options">
+          <button
+            onclick="selectOption('paper')"
+            class="btn-options paper-border"
+          >
+            <img src="./images/icon-paper.svg" alt="paper" />
+          </button>
+          <button
+            onclick="selectOption('scissors')"
+            class="btn-options scissors-border"
+          >
+            <img src="./images/icon-scissors.svg" alt="scissors" />
+          </button>
+          <button
+            onclick="selectOption('rock')"
+            class="btn-options rock-border"
+          >
+            <img src="./images/icon-rock.svg" alt="rock" />
+          </button>
+        </div>
+      </div>
 
-      <span id="content-primary"></span>
+      <div id="match-result" class="match-result">
+        <div class="item-macth-result">
+          <p>YOU PICKED</p>
+          <button id="you-picked" class="btn-options">
+            <img id="you-picked-img" src="" alt="" />
+          </button>
+        </div>
+        <div id="play-again" class="box-play-again">
+          <h2 id="play-result"></h2>
+          <button onclick="playAgain()" class="btn-play-again">
+            PLAY AGAIN
+          </button>
+        </div>
+        <div class="item-macth-result">
+          <p>THE HOUSE PICKED</p>
+          <button id="the-house-picked" class="btn-options">
+            <img id="the-house-picked-img" src="" alt="" />
+          </button>
+        </div>
+      </div>
 
-      <span id="content-secondary"></span>
+      <div id="modal-rules" class="modal-rules">
+        <div>
+          <h2>RULES</h2>
+          <img
+            onclick="showOrHiddenModal()"
+            src="./images/icon-close.svg"
+            alt="close"
+          />
+        </div>
+        <img src="./images/image-rules.svg" alt="rules" />
+      </div>
 
-      <footer class="footer">
-        <button onclick="openModal()">RULES</button>
-      </footer>
-    </div>
-
+      <button onclick="showOrHiddenModal()" class="rules">rules</button>
+    </section>
     <script type="text/javascript" src="./script.js"></script>
   </body>
 </html>
-
-<span id="modal"></span>

@@ -1,59 +1,73 @@
+// Variables
+var showModal = false;
 var score = document.getElementById("score").innerText = 0;
-var papperObj = {
-  name: 'papper',
-  image: './images/icon-paper.svg',
-};
-var scissorsObj = {
-  name: 'scissors',
-  image: './images/icon-scissors.svg',
-};
-var rockObj = {
-  name: 'rock',
-  image: './images/icon-rock.svg',
-};
+var numberOfMoves = 0;
 
-var qtsNumberOfAattempts;
-
-
-function selectOption(option) {
-  showViewOptions(true);
-  if (option === 'paper') {
-    handlerViewContentSecondary(papperObj);
-  }
-
-  if (option === 'scissors') {
-    handlerViewContentSecondary(scissorsObj);
-  }
-
-  if (option === 'rock') {
-    handlerViewContentSecondary(rockObj);
-  }
-
+// Show modal
+function showOrHiddenModal() {
+  showModal = !showModal;
+  showModal
+    ? document.getElementById('modal-rules').style.display = 'block'
+    : document.getElementById('modal-rules').style.display = 'none';
 }
 
-function handlerViewContentSecondary(obj) {
-  setTimeout(() => {
-    var ramdomObj;
-    const random = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
-    random === 1 ? ramdomObj = papperObj : '';
-    random === 2 ? ramdomObj = scissorsObj : '';
-    random === 3 ? ramdomObj = rockObj : '';
+// Handler option chosen by the player
+function selectOption(option) {
+  const ramdomOption = setElementRamdom();
 
-    var message;
-    if (obj.name === 'papper' && ramdomObj.name !== 'scissors') {
-      if (obj.name === ramdomObj.name) {
+  if (option === 'paper') {
+    setElementPicked('paper');
+  } else if (option === 'scissors') {
+    setElementPicked('scissors');
+  } else {
+    setElementPicked('rock');
+  }
+
+  compareChosenValues(option, ramdomOption);
+
+  document.getElementById('choice-options').className = "choice-options hiddenContent";
+  setTimeout(() => {
+    document.getElementById('choice-options').style.display = "none";
+    document.getElementById('match-result').style.display = "flex";
+  }, 1500);
+}
+
+// Set player option
+function setElementPicked(event) {
+  document.getElementById('you-picked').className = `btn-options ${event}-border`;
+  document.getElementById('you-picked-img').setAttribute('src', `./images/icon-${event}.svg`);
+}
+
+// Set machine option
+function setElementRamdom() {
+  let ramdomOption;
+  const random = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+  random === 1 ? ramdomOption = 'paper' : '';
+  random === 2 ? ramdomOption = 'scissors' : '';
+  random === 3 ? ramdomOption = 'rock' : '';
+
+  document.getElementById('the-house-picked').className = `btn-options ${ramdomOption}-border`;
+  document.getElementById('the-house-picked-img').setAttribute('src', `./images/icon-${ramdomOption}.svg`);
+  return ramdomOption;
+}
+
+// Compare chosen values
+function compareChosenValues(option, ramdomOption) {
+  setTimeout(() => {
+    if (option === 'paper' && ramdomOption !== 'scissors') {
+      if (option === ramdomOption) {
       } else {
         score = +10;
         document.getElementById("score").innerText = score;
       }
-    } else if (obj.name === 'scissors' && ramdomObj.name !== 'rock') {
-      if (obj.name === ramdomObj.name) {
+    } else if (option === 'scissors' && ramdomOption !== 'rock') {
+      if (option === ramdomOption) {
       } else {
         score += 10;
         document.getElementById("score").innerText = score;
       }
-    } else if (obj.name === 'rock' && ramdomObj.name !== 'papper') {
-      if (obj.name === ramdomObj.name) {
+    } else if (option === 'rock' && ramdomOption !== 'paper') {
+      if (option === ramdomOption) {
       } else {
         score += 10;
         document.getElementById("score").innerText = score;
@@ -63,165 +77,37 @@ function handlerViewContentSecondary(obj) {
       document.getElementById("score").innerText = score;
     }
 
-
-    if (score === 0) {
-      message = "GAME TIED!"
+    if (score < 0) {
+      document.getElementById("play-result").innerText = "YOU LOSE";
+      document.getElementById("the-house-picked").style.borderBottomStyle = "double";
     } else if (score > 0) {
-      message = "YOU WINS!"
+      document.getElementById("play-result").innerText = "YOU WINS";
+      document.getElementById("you-picked").style.borderBottomStyle = "double";
     } else {
-      message = 'YOU LOSE!';
+      document.getElementById("play-result").innerText = 'GAME TIED';
     }
+  }, 1500);
 
-    showViewContentSecondary(false, obj, ramdomObj, message);
-  }, 1000);
 }
 
-function showViewContentSecondary(hidden, obj, ramdomObj, message) {
-  var PLAYAGAIN;
-
-  if (qtsNumberOfAattempts == 1) {
-    PLAYAGAIN =
-      `
-    <div class="play-again">
-    <h2>${message}</h2>
-    <button onclick="showMenuPlay(false)">PLAY AGAIN</button>
-  </div>
-    `;
-  } else {
-    PLAYAGAIN = '';
-  }
-
-  if (!hidden) {
-    document.getElementById("remaining-moves").innerText = '';
-    const HTML =
-      `
-  <section class="content-secondary">
-  <div>
-    <h2>YOU PICKED</h2>
-    <button class="btn-content-secondary border-btn-${obj.name}">
-      <img src="${obj.image}" alt="${obj.name}" />
-    </button> 
-  </div>
-  ${PLAYAGAIN}
-  <div>
-    <h2>THE HOUSE PICKED</h2>
-    <button class="btn-content-secondary border-btn-${ramdomObj.name}">
-      <img src="${ramdomObj.image}" alt="${ramdomObj.name}" />
-    </button>
-  </div>
-</section>
-  `;
-    document.getElementById('content-secondary').innerHTML = HTML;
-
-    if (qtsNumberOfAattempts != 1) {
-      setTimeout(() => {
-        showViewContentSecondary(true);
-        showViewOptions(false);
-      }, 1500);
-    }
-
-    qtsNumberOfAattempts--;
-
-
-  } else {
-    document.getElementById('content-secondary').innerHTML = null;
-  }
+// Play again
+function playAgain() {
+  document.getElementById("score").innerText = (score = 0);
+  document.getElementById('match-result').style.display = "none";
+  document.getElementById('choice-options').className = "choice-options";
+  document.getElementById('choice-options').style.display = "flex";
+  document.getElementById("the-house-picked").style.borderBottomStyle = ''
+  document.getElementById("you-picked").style.borderBottomStyle = '';
 }
 
-function openModal() {
-  const modal =
-    `
-  <section class="modal-rules">
-  <div>
-    <h1>RULES</h1>
-    <img onclick="closeModal()" src="./images/icon-close.svg" alt="icon-close" />
-  </div>
-  <img class="rules" src="./images/image-rules.svg" alt="image-rules" />
-</section>
-  `
-  document.getElementById('modal').innerHTML = modal;
+// Select quantity
+function selectQuantity(event) {
+  numberOfMoves = Number(event);
+  document.getElementById("menu-options").className = "menu-options hiddenContent";
+  setTimeout(() => {
+    document.getElementById('menu-options').style.display = "none";
+    document.getElementById('choice-options').style.display = "flex";
+    document.getElementById('header').style.display = "flex";
+    document.getElementById("qtd-moves").innerText = `Remaining moves: ${numberOfMoves}`;
+  }, 1500);
 }
-
-function closeModal() {
-  document.getElementById('modal').innerHTML = null;
-}
-
-function showViewOptions(hidden) {
-  if (!hidden && qtsNumberOfAattempts > 0) {
-    const remainingMoves =
-      `
-    <p>Remaining moves: ${qtsNumberOfAattempts}</p>
-    `;
-    document.getElementById('remaining-moves').innerHTML = remainingMoves;
-
-    const HTML =
-      `
-    <section class="content-primary">
-    <div>
-      <img src="./images/bg-triangle.svg" alt="bg-triangle" />
-      <button onclick="selectOption('paper')" class="btn-paper">
-        <img src="./images/icon-paper.svg" alt="papper" />
-      </button>
-      <button onclick="selectOption('scissors')" class="btn-scissors">
-        <img src="./images/icon-scissors.svg" alt="scissors" />
-      </button>
-      <button onclick="selectOption('rock')" class="btn-rock">
-        <img src="./images/icon-rock.svg" alt="rock" />
-      </button>
-    </div>
-  </section>
-    `;
-
-    document.getElementById('content-primary').innerHTML = HTML;
-    showViewContentSecondary(true);
-  } else {
-    document.getElementById('content-primary').innerHTML = null;
-  }
-}
-
-
-function play() {
-  const numberOfAattempts = document.getElementById("number-of-attempts").value;
-  if (numberOfAattempts <= 0) {
-    const HTML =
-      `
-    <h3>Please enter a quantity...</h3>
-    `
-    document.getElementById('msg-error').innerHTML = HTML;
-    setTimeout(() => {
-      document.getElementById('msg-error').innerHTML = null;
-    }, 2000);
-  } else {
-    document.getElementById('msg-error').innerHTML = null;
-    qtsNumberOfAattempts = numberOfAattempts;
-    showViewOptions(false);
-    showMenuPlay(true);
-  }
-}
-
-function showMenuPlay(hidden) {
-  if (!hidden) {
-    const HTML =
-      `
-    <div>
-<h2>Throw rock, paper and scissors at the machine and test your luck! :) Good game!</h2>
-    <h3>Enter the number of times you want to play:</h3>
-    <input
-      type="number"
-      name="number-of-attempts"
-      id="number-of-attempts"
-    />
-    <button onclick="play()">PLAY</button>
-  </div>
-`;
-    document.getElementById("remaining-moves").innerText = null;
-    document.getElementById("score").innerText = (score = 0);
-    document.getElementById('content-secondary').innerHTML = null;
-    document.getElementById('play-menu').innerHTML = HTML;
-  } else {
-    document.getElementById('play-menu').innerHTML = null;
-  }
-}
-
-showMenuPlay(false);
-
