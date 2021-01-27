@@ -1,113 +1,159 @@
 // Variables
-var showModal = false;
-var score = document.getElementById("score").innerText = 0;
 var numberOfMoves = 0;
+var score = 0;
+var showModal = false;
 
-// Show modal
-function showOrHiddenModal() {
-  showModal = !showModal;
-  showModal
-    ? document.getElementById('modal-rules').style.display = 'block'
-    : document.getElementById('modal-rules').style.display = 'none';
-}
+// *Elements DOM*
 
-// Handler option chosen by the player
-function selectOption(option) {
-  const ramdomOption = setElementRamdom();
+// Header - score
+const headerElement = document.getElementById('header');
+const scoreElement = document.getElementById("score");
 
-  if (option === 'paper') {
-    setElementPicked('paper');
-  } else if (option === 'scissors') {
-    setElementPicked('scissors');
-  } else {
-    setElementPicked('rock');
-  }
+scoreElement.innerText = 0;
 
-  compareChosenValues(option, ramdomOption);
+// Number of moves
+const qtdMovesElement = document.getElementById("qtd-moves");
 
-  document.getElementById('choice-options').className = "choice-options hiddenContent";
+// Start menu
+const menuOptionsElement = document.getElementById("menu-options");
+
+// Choice options
+const choiceOptionsElement = document.getElementById('choice-options');
+
+// Play result
+const matchResultElement = document.getElementById('match-result');
+const playAgainElement = document.getElementById('play-again');
+const messageResultElement = document.getElementById("play-result");
+const myChoiceElement = document.getElementById('you-picked');
+const myChoiceImgElement = document.getElementById('you-picked-img');
+const chooseMachineElement = document.getElementById('the-house-picked');
+const chooseMachineImgElement = document.getElementById('the-house-picked-img');
+
+// Modal rules
+const modalRulesElement = document.getElementById('modal-rules');
+
+// Functions
+function getNumberOfMoves(qtd) {
+  numberOfMoves = Number(qtd);
+  menuOptionsElement.className = "menu-options hiddenContent";
   setTimeout(() => {
-    document.getElementById('choice-options').style.display = "none";
-    document.getElementById('match-result').style.display = "flex";
+    menuOptionsElement.style.display = "none";
+    headerElement.style.display = "flex";
+    choiceOptionsElement.style.display = "flex";
+    qtdMovesElement.innerText = `Remaining moves: ${numberOfMoves}`;
   }, 1500);
 }
 
-// Set player option
-function setElementPicked(event) {
-  document.getElementById('you-picked').className = `btn-options ${event}-border`;
-  document.getElementById('you-picked-img').setAttribute('src', `./images/icon-${event}.svg`);
+function showOrHiddenModal() {
+  showModal = !showModal;
+  showModal ? modalRulesElement.style.display = 'block' : modalRulesElement.style.display = 'none';
 }
 
-// Set machine option
-function setElementRamdom() {
-  let ramdomOption;
-  const random = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
-  random === 1 ? ramdomOption = 'paper' : '';
-  random === 2 ? ramdomOption = 'scissors' : '';
-  random === 3 ? ramdomOption = 'rock' : '';
+function selectOption(myOption) {
+  switch (myOption) {
+    case 'rock': setElementPicked('rock'); break;
+    case 'paper': setElementPicked('paper'); break;
+    case 'scissors': setElementPicked('scissors'); break;
+    default: break;
+  }
 
-  document.getElementById('the-house-picked').className = `btn-options ${ramdomOption}-border`;
-  document.getElementById('the-house-picked-img').setAttribute('src', `./images/icon-${ramdomOption}.svg`);
+  const ramdomOption = setElementRamdom();
+  compareChosenValues(myOption, ramdomOption);
+
+  choiceOptionsElement.className = "choice-options hiddenContent";
+  setTimeout(() => {
+    choiceOptionsElement.style.display = "none";
+    matchResultElement.style.display = "flex";
+  }, 1500);
+
+  numberOfMoves -= 1;
+  qtdMovesElement.innerText = `Remaining moves: ${numberOfMoves}`;
+
+  if (numberOfMoves > 0) {
+    setTimeout(() => {
+      matchResultElement.style.display = "none";
+      choiceOptionsElement.style.display = "flex";
+      choiceOptionsElement.className = "choice-options";
+      resetBorder();
+    }, 3000);
+  } else {
+    playAgainElement.style.display = "block";
+  }
+}
+
+function setElementPicked(option) {
+  myChoiceElement.className = `btn-options ${option}-border`;
+  myChoiceImgElement.setAttribute('src', `./images/icon-${option}.svg`);
+}
+
+function setElementRamdom() {
+  let ramdomOption = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+
+  switch (ramdomOption) {
+    case 1: ramdomOption = 'rock'; break;
+    case 2: ramdomOption = 'paper'; break;
+    case 3: ramdomOption = 'scissors'; break;
+    default: break;
+  }
+
+  chooseMachineElement.className = `btn-options ${ramdomOption}-border`;
+  chooseMachineImgElement.setAttribute('src', `./images/icon-${ramdomOption}.svg`);
   return ramdomOption;
 }
 
-// Compare chosen values
-function compareChosenValues(option, ramdomOption) {
+function compareChosenValues(myOption, ramdomOption) {
   setTimeout(() => {
-    if (option === 'paper' && ramdomOption !== 'scissors') {
-      if (option === ramdomOption) {
-      } else {
-        score = +10;
-        document.getElementById("score").innerText = score;
+    if (myOption === 'rock' && ramdomOption !== 'paper') {
+      if (myOption !== ramdomOption) {
+        scoreElement.innerText = (score += 10);
+        myChoiceElement.style.borderBottomStyle = "double";
       }
-    } else if (option === 'scissors' && ramdomOption !== 'rock') {
-      if (option === ramdomOption) {
-      } else {
-        score += 10;
-        document.getElementById("score").innerText = score;
+    } else if (myOption === 'paper' && ramdomOption !== 'scissors') {
+      if (myOption !== ramdomOption) {
+        scoreElement.innerText = (score += 10);
+        myChoiceElement.style.borderBottomStyle = "double";
       }
-    } else if (option === 'rock' && ramdomOption !== 'paper') {
-      if (option === ramdomOption) {
-      } else {
-        score += 10;
-        document.getElementById("score").innerText = score;
+    } else if (myOption === 'scissors' && ramdomOption !== 'rock') {
+      if (myOption !== ramdomOption) {
+        scoreElement.innerText = (score += 10);
+        myChoiceElement.style.borderBottomStyle = "double";
       }
     } else {
-      score -= 10;
-      document.getElementById("score").innerText = score;
+      scoreElement.innerText = (score -= 10);
+      chooseMachineElement.style.borderBottomStyle = "double";
     }
 
-    if (score < 0) {
-      document.getElementById("play-result").innerText = "YOU LOSE";
-      document.getElementById("the-house-picked").style.borderBottomStyle = "double";
-    } else if (score > 0) {
-      document.getElementById("play-result").innerText = "YOU WINS";
-      document.getElementById("you-picked").style.borderBottomStyle = "double";
-    } else {
-      document.getElementById("play-result").innerText = 'GAME TIED';
+    if (numberOfMoves === 0) {
+      if (score < 0) {
+        messageResultElement.innerText = "YOU LOSE";
+      } else if (score > 0) {
+        messageResultElement.innerText = "YOU WINS";
+      } else {
+        messageResultElement.innerText = 'GAME TIED';
+      }
     }
   }, 1500);
-
 }
 
-// Play again
+function resetBorder() {
+  chooseMachineElement.style.borderBottomStyle = ''
+  myChoiceElement.style.borderBottomStyle = '';
+}
+
 function playAgain() {
-  document.getElementById("score").innerText = (score = 0);
-  document.getElementById('match-result').style.display = "none";
-  document.getElementById('choice-options').className = "choice-options";
-  document.getElementById('choice-options').style.display = "flex";
-  document.getElementById("the-house-picked").style.borderBottomStyle = ''
-  document.getElementById("you-picked").style.borderBottomStyle = '';
+  scoreElement.innerText = (score = 0);
+  qtdMovesElement.innerText = null;
+  matchResultElement.style.display = "none";
+  headerElement.style.display = "none";
+  menuOptionsElement.style.display = "flex";
+  playAgainElement.style.display = "none";
+  choiceOptionsElement.className = "choice-options";
+  menuOptionsElement.className = "menu-options";
+  resetBorder();
 }
 
-// Select quantity
-function selectQuantity(event) {
-  numberOfMoves = Number(event);
-  document.getElementById("menu-options").className = "menu-options hiddenContent";
+const startAudio = () => {
   setTimeout(() => {
-    document.getElementById('menu-options').style.display = "none";
-    document.getElementById('choice-options').style.display = "flex";
-    document.getElementById('header').style.display = "flex";
-    document.getElementById("qtd-moves").innerText = `Remaining moves: ${numberOfMoves}`;
-  }, 1500);
-}
+    document.getElementById('audio').play();
+  }, 3000);
+};

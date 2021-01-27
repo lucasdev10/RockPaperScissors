@@ -7,8 +7,9 @@
     <title>Rock, Paper, Scissors</title>
   </head>
 
-  <body>
+  <body onload="startAudio()" onclick="startAudio()">
     <section class="container">
+      <!-- Header - score -->
       <header id="header" class="header">
         <h1 class="logo">
           <img src="./images/logo.svg" alt="logo" />
@@ -18,25 +19,28 @@
           <p id="score"></p>
         </span>
       </header>
+      <!-- Number Of Moves -->
       <span class="qtd-moves" id="qtd-moves"></span>
 
+      <!-- Start menu -->
       <div id="menu-options" class="menu-options">
         <h1>Rock, Paper and Scissors</h1>
         <p>Be welcome!</p>
         <p>Choose an option and start playing against the machine:</p>
         <div class="box-buttons">
-          <button onclick="selectQuantity('1')" value="1" class="btn-choice">
+          <button onclick="getNumberOfMoves('1')" value="1" class="btn-choice">
             1 time
           </button>
-          <button onclick="selectQuantity('3')" value="3" class="btn-choice">
+          <button onclick="getNumberOfMoves('3')" value="3" class="btn-choice">
             3 time
           </button>
-          <button onclick="selectQuantity('5')" value="5" class="btn-choice">
+          <button onclick="getNumberOfMoves('5')" value="5" class="btn-choice">
             5 time
           </button>
         </div>
       </div>
 
+      <!-- Choice Options -->
       <div id="choice-options" class="choice-options">
         <div class="content-options">
           <button
@@ -60,6 +64,7 @@
         </div>
       </div>
 
+      <!-- Play Result -->
       <div id="match-result" class="match-result">
         <div class="item-macth-result">
           <p>YOU PICKED</p>
@@ -67,7 +72,7 @@
             <img id="you-picked-img" src="" alt="" />
           </button>
         </div>
-        <div id="play-again" class="box-play-again">
+        <div id="play-again" class="play-again">
           <h2 id="play-result"></h2>
           <button onclick="playAgain()" class="btn-play-again">
             PLAY AGAIN
@@ -81,6 +86,7 @@
         </div>
       </div>
 
+      <!-- Modal rules -->
       <div id="modal-rules" class="modal-rules">
         <div>
           <h2>RULES</h2>
@@ -93,8 +99,14 @@
         <img src="./images/image-rules.svg" alt="rules" />
       </div>
 
-      <button onclick="showOrHiddenModal()" class="rules">rules</button>
+      <!-- Button rules -->
+      <button onclick="showOrHiddenModal()" class="rules span">rules</button>
     </section>
+
+    <audio id="audio" hidden controls>
+      <source id="source" src="./audio/NarutoSoundtrack-NarutoMainTheme.mp3" />
+    </audio>
+
     <script type="text/javascript" src="./script.js"></script>
   </body>
 </html>

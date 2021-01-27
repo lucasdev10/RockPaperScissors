@@ -67,7 +67,7 @@ button {
 
 .menu-options p {
   color: #fff;
-  font-size: 1.8em;
+  font-size: 1.4em;
   text-align: center;
   max-width: 90%;
   margin: 5px 0;
@@ -88,8 +88,9 @@ button {
   background: var(--Rock-Gradient);
   border-radius: 5px;
   color: #fff;
+  text-transform: uppercase;
   font-weight: bold;
-  box-shadow: 5px 5px 4px 2px #141539;
+  box-shadow: 5px 5px 4px 2px #0f0f2e;
   margin: 0 5px;
 }
 
@@ -237,7 +238,11 @@ button {
   font-weight: bold;
 }
 
-.box-play-again h2 {
+.play-again {
+  display: none;
+}
+
+.play-again h2 {
   color: #fff;
   font-size: 2.5em;
   margin-bottom: 15px;
@@ -291,8 +296,8 @@ button {
 
 .rules {
   position: absolute;
-  bottom: 25px;
-  right: 30px;
+  bottom: 5%;
+  right: 0%;
   padding: 8px 25px;
   font-size: 0.75em;
   color: #fff;
@@ -302,6 +307,10 @@ button {
   border-radius: 5px;
   background-color: transparent;
   letter-spacing: 2px;
+}
+
+.rules:hover {
+  zoom: 1.1;
 }
 
 .hiddenContent {
@@ -320,6 +329,62 @@ button {
   }
 }
 
+.span {
+  animation: span 10s linear infinite;
+}
+
+@keyframes span {
+  10% {
+    bottom: 5%;
+    right: 10%;
+  }
+
+  20% {
+    bottom: 5%;
+    right: 20%;
+  }
+
+  30% {
+    bottom: 5%;
+    right: 30%;
+  }
+
+  40% {
+    bottom: 5%;
+    right: 40%;
+  }
+
+  50% {
+    bottom: 5%;
+    right: 50%;
+  }
+
+  60% {
+    bottom: 5%;
+    right: 60%;
+  }
+
+  70% {
+    bottom: 5%;
+    right: 70%;
+  }
+
+  80% {
+    bottom: 5%;
+    right: 80%;
+  }
+
+  90% {
+    bottom: 5%;
+    right: 90%;
+  }
+
+  100% {
+    bottom: 5%;
+    right: 100%;
+  }
+}
+
 @media (max-width: 767px) {
   .modal-rules {
     width: 100%;
@@ -332,7 +397,7 @@ button {
     margin-top: 50%;
   }
 
-  .box-play-again {
+  .play-again {
     position: absolute;
     bottom: 15%;
   }
